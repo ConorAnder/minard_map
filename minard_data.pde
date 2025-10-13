@@ -28,5 +28,23 @@ void setup() {
   
   plotMapPoints(city_longs, city_lats);
   plotCityNames(city_names, city_longs, city_lats);
-  plotTestPointsAdvance(surv_longs, surv_lats, surv_count, surv_dir);
+  // plotTestPointsAdvance(surv_longs, surv_lats, surv_count, surv_dir);
+  
+  
+  FloatList div_1_adv = new FloatList();
+  IntList ints = new IntList();
+  for (int it = 0; it < data.getRowCount(); it++) {
+    if(surv_dir[it].contains("A") && surv_div[it] == 1.0) {
+      div_1_adv.append(surv_count[it]);
+      ints.append(it);
+      print("Appending " + str(surv_count[it]) + "\n");
+    }
+  }
+  div_1_adv.sort();
+  for (int i = 0; i < div_1_adv.size(); i++) {
+    print(div_1_adv.get(i));
+    print(" ");
+    print(ints.get(i));
+    print("\n");
+  }
 }
