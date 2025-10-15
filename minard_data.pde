@@ -1,10 +1,9 @@
 
 void setup() {
-  fullScreen();
+  size(1920, 720);
   background(255, 255, 255);
   
   Table data = loadTable("minard_data.csv", "header");
-  println(data.getRowCount() + " total rows in table");
   
   // There are three different blocks of information in the csv:
   // Cities ->
@@ -26,25 +25,14 @@ void setup() {
   String[] surv_dir = getStrings(data, data.getRowCount(), "DIR");
   float[] surv_div = getFloats(data, data.getRowCount(), "DIV");
   
-  plotMapPoints(city_longs, city_lats);
-  plotCityNames(city_names, city_longs, city_lats);
-  // plotTestPointsAdvance(surv_longs, surv_lats, surv_count, surv_dir);
+  // Need all coords to keep mapping consistent
+  float[] all_longs = concat(city_longs, surv_longs);
+  float[] all_lats = concat(city_lats, surv_lats);
   
+  ArrayList<survCoord> coords = getCoords(surv_longs, surv_lats, surv_count, surv_dir, surv_div);
+  coords.sort((a, b) -> Float.compare(b.count, a.count));
   
-  FloatList div_1_adv = new FloatList();
-  IntList ints = new IntList();
-  for (int it = 0; it < data.getRowCount(); it++) {
-    if(surv_dir[it].contains("A") && surv_div[it] == 1.0) {
-      div_1_adv.append(surv_count[it]);
-      ints.append(it);
-      print("Appending " + str(surv_count[it]) + "\n");
-    }
-  }
-  div_1_adv.sort();
-  for (int i = 0; i < div_1_adv.size(); i++) {
-    print(div_1_adv.get(i));
-    print(" ");
-    print(ints.get(i));
-    print("\n");
-  }
+  plotMainAdvance(coords, surv_count, all_longs, all_lats);
+  plotMapPoints(city_longs, city_lats, all_longs, all_lats);
+  plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
 }

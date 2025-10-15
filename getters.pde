@@ -24,3 +24,11 @@ ArrayList getTempColour(float[] temps) {
   }
   return colours;
 }
+
+ArrayList<survCoord> getCoords(float[] longs, float[] lats, float[] counts, String[] dirs, float[] divs) {
+  ArrayList<survCoord> coords = new ArrayList<survCoord>();
+  for (int i = 0; i < longs.length; i++) {
+    coords.add(new survCoord(longs[i], lats[i], counts[i], dirs[i], divs[i]));
+  }
+  return coords;
+}
