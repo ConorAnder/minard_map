@@ -33,6 +33,7 @@ void setup() {
   coords.sort((a, b) -> Float.compare(b.count, a.count));
   
   plotMainAdvance(coords, surv_count, all_longs, all_lats);
+  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
 }
