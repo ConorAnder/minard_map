@@ -1,6 +1,6 @@
 
 void setup() {
-  size(1920, 720);
+  size(1000, 500);
   background(255, 255, 255);
   
   Table data = loadTable("minard_data.csv", "header");
