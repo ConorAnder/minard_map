@@ -21,22 +21,6 @@ void plotCityNames(String[] names, float[] longs, float[] lats, float[] all_long
   }
 }
 
-void plotMainAdvance(ArrayList<survCoord> coords, float[] surv_count, float[] all_longs, float[] all_lats) {
-  stroke(advance);
-  noFill();
-  for (int i = 0; i < coords.size() - 1; i++) {
-    if (coords.get(i).direction.contains("A") && coords.get(i).division == 1) {
-      int line_thickness = int(map(coords.get(i).count, min(surv_count), max(surv_count), 5, 100));
-      strokeWeight(line_thickness);
-      int x1 = int(map(coords.get(i).longitude, min(all_longs), max(all_longs), left_border, right_border));
-      int y1 = int(map(coords.get(i).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
-      int x2 = int(map(coords.get(i+1).longitude, min(all_longs), max(all_longs), left_border, right_border));
-      int y2 = int(map(coords.get(i+1).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
-      line(x1, y1, x2 + 5, y2);
-    }
-  }
-}
-
 void plotAdvances(ArrayList<survCoord> coords, float[] surv_count, float[] all_longs, float[] all_lats, int div) {
   stroke(advance);
   noFill();
