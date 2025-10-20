@@ -1,7 +1,17 @@
+int left_border;
+int right_border;
+int top_border;
+int bottom_border;
+color advance = color(0, 255, 0);
+color retreat = color(0, 0, 0);
 
 void setup() {
-  size(1000, 500);
+  size(1500, 750);
   background(255, 255, 255);
+  left_border = 100;
+  right_border = width - 100;
+  bottom_border = 3 * (height - 100) / 5;
+  top_border = 100;
   
   Table data = loadTable("minard_data.csv", "header");
   
@@ -33,7 +43,8 @@ void setup() {
   coords.sort((a, b) -> Float.compare(b.count, a.count));
   
   plotMainAdvance(coords, surv_count, all_longs, all_lats);
-  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats);
+  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats, 2);
+  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats, 3);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
 }
