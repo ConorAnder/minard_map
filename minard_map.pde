@@ -4,6 +4,7 @@ int top_border;
 int bottom_border;
 color advance = color(0, 255, 0);
 color retreat = color(0, 0, 0);
+color city_colour = color(255, 0, 0);
 
 void setup() {
   size(1500, 750);
@@ -42,9 +43,12 @@ void setup() {
   ArrayList<survCoord> coords = getCoords(surv_longs, surv_lats, surv_count, surv_dir, surv_div);
   coords.sort((a, b) -> Float.compare(b.count, a.count));
   
-  plotMainAdvance(coords, surv_count, all_longs, all_lats);
-  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats, 2);
-  plotSecondaryAdvances(coords, surv_count, all_longs, all_lats, 3);
+  plotAdvances(coords, surv_count, all_longs, all_lats, 1);
+  plotAdvances(coords, surv_count, all_longs, all_lats, 2);
+  plotAdvances(coords, surv_count, all_longs, all_lats, 3);
+  plotRetreats(coords, surv_count, all_longs, all_lats, 1);
+  plotRetreats(coords, surv_count, all_longs, all_lats, 2);
+  plotRetreats(coords, surv_count, all_longs, all_lats, 3);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
 }
