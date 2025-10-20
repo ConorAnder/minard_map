@@ -1,19 +1,24 @@
-int left_border;
-int right_border;
-int top_border;
-int bottom_border;
-color advance = color(0, 255, 0);
-color retreat = color(0, 0, 0);
-color city_colour = color(255, 0, 0);
+int left_border_map, right_border_map, top_border_map, bottom_border_map;
+int left_border_legend, right_border_legend, top_border_legend, bottom_border_legend;
+color advance = color(196, 78, 82);
+color retreat = color(76, 114, 176);
+color city_colour = color(59, 59, 59);
 
 void setup() {
+  // Window size and borders
   size(1500, 750);
-  background(255, 255, 255);
-  left_border = 100;
-  right_border = width - 100;
-  bottom_border = 3 * (height - 100) / 5;
-  top_border = 100;
-  
+  background(245, 240, 225);
+  left_border_map = 100;
+  right_border_map = width - 100;
+  bottom_border_map = 3 * (height - 100) / 5;
+  top_border_map = 100;
+
+  left_border_legend = 40;
+  right_border_legend = width / 4;
+  bottom_border_legend = height - 100;
+  top_border_legend = bottom_border_map;
+
+  // Insert data from csv into a table
   Table data = loadTable("minard_data.csv", "header");
   
   // There are three different blocks of information in the csv:
@@ -40,9 +45,11 @@ void setup() {
   float[] all_longs = concat(city_longs, surv_longs);
   float[] all_lats = concat(city_lats, surv_lats);
   
+  // Sort all survivor data points by survivor count
   ArrayList<survCoord> coords = getCoords(surv_longs, surv_lats, surv_count, surv_dir, surv_div);
   coords.sort((a, b) -> Float.compare(b.count, a.count));
-  
+
+  // Plotting
   plotAdvances(coords, surv_count, all_longs, all_lats, 1);
   plotAdvances(coords, surv_count, all_longs, all_lats, 2);
   plotAdvances(coords, surv_count, all_longs, all_lats, 3);
@@ -51,4 +58,8 @@ void setup() {
   plotRetreats(coords, surv_count, all_longs, all_lats, 3);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
+  print(right_border_legend);
+  ellipse(right_border_legend, top_border_legend, 6, 6);
+  square(left_border_legend, top_border_legend, right_border_legend);
+  ellipse(right_border_legend / 2, top_border_legend + int((bottom_border_legend - top_border_legend) / 2.0), 6, 6);
 }

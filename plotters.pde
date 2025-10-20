@@ -2,8 +2,8 @@ void plotMapPoints(float[] longs, float[] lats, float[] all_longs, float[] all_l
   fill(city_colour);
   noStroke();
   for (int i = 0; i < 20; i++) {
-    float x = map(longs[i], min(all_longs), max(all_longs), left_border, right_border);
-    float y = map(lats[i], min(all_lats), max(all_lats), bottom_border, top_border);
+    float x = map(longs[i], min(all_longs), max(all_longs), left_border_map, right_border_map);
+    float y = map(lats[i], min(all_lats), max(all_lats), bottom_border_map, top_border_map);
     //println(x + " " + y);
     ellipse(x, y, 6, 6);
   }
@@ -11,8 +11,8 @@ void plotMapPoints(float[] longs, float[] lats, float[] all_longs, float[] all_l
 
 void plotCityNames(String[] names, float[] longs, float[] lats, float[] all_longs, float[] all_lats) {
   for(int i = 0; i < 20; i++) {
-    float x = map(longs[i], min(all_longs), max(all_longs), left_border, right_border);
-    float y = map(lats[i], min(all_lats), max(all_lats), bottom_border, top_border);
+    float x = map(longs[i], min(all_longs), max(all_longs), left_border_map, right_border_map);
+    float y = map(lats[i], min(all_lats), max(all_lats), bottom_border_map, top_border_map);
     
     fill(city_colour);
     textSize(10);
@@ -45,10 +45,10 @@ void plotAdvances(ArrayList<survCoord> coords, float[] surv_count, float[] all_l
     print("Current data point direction is " + sub_array.get(i).direction + " and is in division " + str(sub_array.get(i).division) + "\n");
     int line_thickness = int(map(sub_array.get(i).count, min(surv_count), max(surv_count), 5, 100));
     strokeWeight(line_thickness);
-    int x1 = int(map(sub_array.get(i).longitude, min(all_longs), max(all_longs), left_border, right_border));
-    int y1 = int(map(sub_array.get(i).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
-    int x2 = int(map(sub_array.get(i+1).longitude, min(all_longs), max(all_longs), left_border, right_border));
-    int y2 = int(map(sub_array.get(i+1).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
+    int x1 = int(map(sub_array.get(i).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map));
+    int y1 = int(map(sub_array.get(i).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map));
+    int x2 = int(map(sub_array.get(i+1).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map));
+    int y2 = int(map(sub_array.get(i+1).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map));
     print("Plotting point at " + str(x1) + ", " + str(y1) + " to " + str(x2) + ", " + str(y2) + " in division " + str(sub_array.get(i).division) + "\n");
     line(x1, y1, x2, y2);
   }
@@ -73,10 +73,10 @@ void plotRetreats(ArrayList<survCoord> coords, float[] surv_count, float[] all_l
     print("Current data point direction is " + sub_array.get(i).direction + " and is in division " + str(sub_array.get(i).division) + "\n");
     int line_thickness = int(map(sub_array.get(i).count, min(surv_count), max(surv_count), 5, 100));
     strokeWeight(line_thickness);
-    int x1 = int(map(sub_array.get(i).longitude, min(all_longs), max(all_longs), left_border, right_border));
-    int y1 = int(map(sub_array.get(i).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
-    int x2 = int(map(sub_array.get(i+1).longitude, min(all_longs), max(all_longs), left_border, right_border));
-    int y2 = int(map(sub_array.get(i+1).latitude, min(all_lats), max(all_lats), bottom_border, top_border));
+    int x1 = int(map(sub_array.get(i).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map));
+    int y1 = int(map(sub_array.get(i).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map));
+    int x2 = int(map(sub_array.get(i+1).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map));
+    int y2 = int(map(sub_array.get(i+1).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map));
     print("Plotting point at " + str(x1) + ", " + str(y1) + " to " + str(x2) + ", " + str(y2) + " in division " + str(sub_array.get(i).division) + "\n");
     line(x1, y1, x2, y2);
   }
