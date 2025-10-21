@@ -83,3 +83,23 @@ void plotRetreats(ArrayList<survCoord> coords, float[] surv_count, float[] all_l
 
   sub_array.clear();
 }
+
+void plotTempLines(float[] temp_longs, float[] all_longs) {
+  float left_x = getTempPos(temp_longs, all_longs).min();
+  float right_x = right_border_map;
+  stroke(city_colour);
+  strokeWeight(2);
+
+  textAlign(CENTER);
+  textSize(15);
+  int[] temps = {0, -13, -25, -38};
+  int i = 0;
+
+  text("°C", width - 100, 8.3 * height / 15);
+
+  for (int y = 9 * height / 15; y < 13 * height / 15; y += height / 15) {
+    text(str(temps[i]), width - 100, y);
+    line(left_x, y, right_x, y);
+    i++;
+  }
+}

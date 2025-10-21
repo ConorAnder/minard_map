@@ -8,8 +8,8 @@ void setup() {
   // Window size and borders
   size(1500, 750);
   background(245, 240, 225);
-  left_border_map = 100;
-  right_border_map = width - 100;
+  left_border_map = 150;
+  right_border_map = width - 150;
   bottom_border_map = 3 * (height - 100) / 5;
   top_border_map = 100;
 
@@ -58,8 +58,5 @@ void setup() {
   plotRetreats(coords, surv_count, all_longs, all_lats, 3);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
-  print(right_border_legend);
-  ellipse(right_border_legend, top_border_legend, 6, 6);
-  square(left_border_legend, top_border_legend, right_border_legend);
-  ellipse(right_border_legend / 2, top_border_legend + int((bottom_border_legend - top_border_legend) / 2.0), 6, 6);
+  plotTempLines(temp_longs, all_longs);
 }

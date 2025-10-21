@@ -25,6 +25,14 @@ ArrayList getTempColour(float[] temps) {
   return colours;
 }
 
+FloatList getTempPos(float[] longs, float[] all_longs) {
+  FloatList positions = new FloatList();
+  for (float i : longs) {
+    positions.append(map(i, min(all_longs), max(all_longs), left_border_map, right_border_map));
+  }
+  return positions;
+}
+
 ArrayList<survCoord> getCoords(float[] longs, float[] lats, float[] counts, String[] dirs, float[] divs) {
   ArrayList<survCoord> coords = new ArrayList<survCoord>();
   for (int i = 0; i < longs.length; i++) {
