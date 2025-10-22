@@ -6,6 +6,7 @@ color retreat = color(76, 114, 176);
 color city_colour = color(59, 59, 59);
 color cold = color(140, 180, 210);
 color warm = color(80, 60, 130);
+PFont main_font;
 
 void setup() {
   // Window size and borders
@@ -23,6 +24,9 @@ void setup() {
 
   // Insert data from csv into a table
   Table data = loadTable("minard_data.csv", "header");
+
+  // Font
+  main_font = createFont("Garamond", 30);
   
   // There are three different blocks of information in the csv:
   // Cities ->
@@ -63,4 +67,6 @@ void setup() {
   plotTempLines(temp_longs, all_longs);
   plotTempGrad(temp_longs, all_longs, temp, temp_day, temp_month);
   plotLegend();
+  plotTitle();
+  save("minard.png");
 }

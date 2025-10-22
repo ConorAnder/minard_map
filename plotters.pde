@@ -16,7 +16,7 @@ void plotCityNames(String[] names, float[] longs, float[] lats, float[] all_long
 
     // Outline of text
     textAlign(CENTER);
-    textSize(11);
+    textSize(12);
     fill(back_ground);
     for (int dx = -1; dx <= 1; dx++) {
       for (int dy = -1; dy <= 1; dy++) {
@@ -186,7 +186,7 @@ void plotLegend() {
   String[] keys = {"Advance", "Retreat", "Cold", "Freezing"};
   color[] colours = {advance, retreat, cold, warm};
   textAlign(LEFT);
-  textSize(15);
+  textFont(main_font, 15);
   strokeWeight(15);
 
   int i = 0;
@@ -196,4 +196,10 @@ void plotLegend() {
     line(2 * width / 18, y - 5, 2 * width / 18 + 20, y - 5);
     i++;
   }
+}
+
+void plotTitle() {
+  textAlign(CENTER);
+  textFont(main_font);
+  text("Napoleon's Campaign in Russia - 1812", width / 2 + 90, height - 75);
 }
