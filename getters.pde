@@ -14,17 +14,6 @@ String[] getStrings(Table data, int size, String column) {
   return cities;
 }
 
-ArrayList getTempColour(float[] temps) {
-  color cold = color(0, 150, 255);     // Light icy blue
-  color freezing = color(100, 0, 150); // Deep purple
-  ArrayList<Integer> colours = new ArrayList<Integer>();
-  for (float temp : temps) {
-    float norm = map(temp, min(temps), max(temps), 0, 1);
-    colours.add(lerpColor(cold, freezing, norm));
-  }
-  return colours;
-}
-
 FloatList getTempPos(float[] longs, float[] all_longs) {
   FloatList positions = new FloatList();
   for (float i : longs) {

@@ -103,3 +103,34 @@ void plotTempLines(float[] temp_longs, float[] all_longs) {
     i++;
   }
 }
+
+void plotTempGrad(float[] temp_longs, float[] all_longs, float[] temp, float[] temp_day, String[] temp_month) {
+  ArrayList<PVector> data_points = new ArrayList<PVector>();
+  textSize(11);
+
+  for (int i = 0; i < temp.length; i++) {
+    float x_pos = map(temp_longs[i], min(all_longs), max(all_longs), left_border_map, right_border_map);
+    float y_pos = map(temp[i], 0, -30, 9 * height / 15, 12 * height / 15);
+    data_points.add(new PVector(x_pos, y_pos));
+    if (!temp_month[i].equals("")) {
+      text(temp_month[i] + " " + str(int(temp_day[i])), x_pos, y_pos + 40);
+    }
+  }
+
+  int subdivisions = 100;
+  strokeWeight(20);
+  for (int i = 0; i < data_points.size() - 1; i++) {
+    for (int j = 0; j < subdivisions; j++) {
+      // Interpolations
+      float segment = j / float(subdivisions);
+      float x = lerp(data_points.get(i).x, data_points.get(i + 1).x, segment);
+      float y = lerp(data_points.get(i).y, data_points.get(i + 1).y, segment);
+      float temperature = lerp(temp[i], temp[i + 1], segment);
+      float mapped_temp = map(temperature, 0, -30, 0, 1);
+
+      stroke(lerpColor(warm, cold, mapped_temp));
+      line(x, y, x+1, y+1);
+      // line(data_points.get(i).x, data_points.get(i).y, data_points.get(i + 1).x, data_points.get(i + 1).y);
+    }
+  }
+}

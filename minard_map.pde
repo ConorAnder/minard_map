@@ -3,6 +3,8 @@ int left_border_legend, right_border_legend, top_border_legend, bottom_border_le
 color advance = color(196, 78, 82);
 color retreat = color(76, 114, 176);
 color city_colour = color(59, 59, 59);
+color cold = color(80, 60, 130);
+color warm = color(140, 180, 210);
 
 void setup() {
   // Window size and borders
@@ -30,8 +32,7 @@ void setup() {
   // Temperature ->
   float[] temp_longs = getFloats(data, 9, "LONT");
   float[] temp = getFloats(data, 9, "TEMP");
-  float[] temp_days = getFloats(data, 9, "DAYS");
-  float[] temp_month = getFloats(data, 9, "MON");
+  String[] temp_month = getStrings(data, 9, "MON");
   float[] temp_day = getFloats(data, 9, "DAY");
   
   // Survivors ->
@@ -59,4 +60,5 @@ void setup() {
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
   plotTempLines(temp_longs, all_longs);
+  plotTempGrad(temp_longs, all_longs, temp, temp_day, temp_month);
 }
