@@ -1,15 +1,16 @@
 int left_border_map, right_border_map, top_border_map, bottom_border_map;
 int left_border_legend, right_border_legend, top_border_legend, bottom_border_legend;
+color back_ground = color(245, 240, 225);
 color advance = color(196, 78, 82);
 color retreat = color(76, 114, 176);
 color city_colour = color(59, 59, 59);
-color cold = color(80, 60, 130);
-color warm = color(140, 180, 210);
+color cold = color(140, 180, 210);
+color warm = color(80, 60, 130);
 
 void setup() {
   // Window size and borders
   size(1500, 750);
-  background(245, 240, 225);
+  background(back_ground);
   left_border_map = 150;
   right_border_map = width - 150;
   bottom_border_map = 3 * (height - 100) / 5;
@@ -61,4 +62,5 @@ void setup() {
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
   plotTempLines(temp_longs, all_longs);
   plotTempGrad(temp_longs, all_longs, temp, temp_day, temp_month);
+  plotLegend();
 }

@@ -13,10 +13,21 @@ void plotCityNames(String[] names, float[] longs, float[] lats, float[] all_long
   for(int i = 0; i < 20; i++) {
     float x = map(longs[i], min(all_longs), max(all_longs), left_border_map, right_border_map);
     float y = map(lats[i], min(all_lats), max(all_lats), bottom_border_map, top_border_map);
-    
-    fill(city_colour);
-    textSize(10);
+
+    // Outline of text
     textAlign(CENTER);
+    textSize(11);
+    fill(back_ground);
+    for (int dx = -1; dx <= 1; dx++) {
+      for (int dy = -1; dy <= 1; dy++) {
+        if (dx != 0 || dy != 0) {
+          text(names[i], x + dx, y + dy - 10);
+        }
+      }
+    }
+
+    // Inner text
+    fill(city_colour);
     text(names[i], x, y - 10);
   }
 }
@@ -128,7 +139,7 @@ void plotTempGrad(float[] temp_longs, float[] all_longs, float[] temp, float[] t
       float temperature = lerp(temp[i], temp[i + 1], segment);
       float mapped_temp = map(temperature, 0, -30, 0, 1);
 
-      stroke(lerpColor(warm, cold, mapped_temp));
+      stroke(lerpColor(cold, warm, mapped_temp));
       line(x, y, x+1, y+1);
       // line(data_points.get(i).x, data_points.get(i).y, data_points.get(i + 1).x, data_points.get(i + 1).y);
     }
@@ -169,4 +180,20 @@ void plotTempGrad(float[] temp_longs, float[] all_longs, float[] temp, float[] t
   ellipse(data_points.get(8).x, data_points.get(8).y, 2, 2);
   line(data_points.get(8).x, data_points.get(8).y, data_points.get(8).x, data_points.get(8).y - 0.3625 * height);
   ellipse(data_points.get(8).x, data_points.get(8).y - 0.3625 * height, 2, 2);
+}
+
+void plotLegend() {
+  String[] keys = {"Advance", "Retreat", "Cold", "Freezing"};
+  color[] colours = {advance, retreat, cold, warm};
+  textAlign(LEFT);
+  textSize(15);
+  strokeWeight(15);
+
+  int i = 0;
+  for (int y = 9 * height / 15; y < 13 * height / 15; y += height / 15) {
+    text(keys[i], width / 18, y);
+    stroke(colours[i]);
+    line(2 * width / 18, y - 5, 2 * width / 18 + 20, y - 5);
+    i++;
+  }
 }
