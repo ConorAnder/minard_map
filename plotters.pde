@@ -133,4 +133,40 @@ void plotTempGrad(float[] temp_longs, float[] all_longs, float[] temp, float[] t
       // line(data_points.get(i).x, data_points.get(i).y, data_points.get(i + 1).x, data_points.get(i + 1).y);
     }
   }
+
+  // Insert vertical lines to connect to map
+  stroke(city_colour);
+  strokeWeight(1);
+  ellipse(data_points.get(0).x, data_points.get(0).y, 2, 2);
+  line(data_points.get(0).x, data_points.get(0).y, data_points.get(0).x, data_points.get(0).y - 0.4666 * height);
+
+  ellipse(data_points.get(1).x, data_points.get(1).y, 2, 2);
+  line(data_points.get(1).x, data_points.get(1).y, data_points.get(1).x, data_points.get(1).y - 0.34 * height);
+  ellipse(data_points.get(1).x, data_points.get(1).y - 0.34 * height, 2, 2);
+
+  ellipse(data_points.get(2).x, data_points.get(2).y, 2, 2);
+  line(data_points.get(2).x, data_points.get(2).y, data_points.get(2).x, data_points.get(2).y - 0.32 * height);
+  ellipse(data_points.get(2).x, data_points.get(2).y - 0.32 * height, 2, 2);
+
+  ellipse(data_points.get(3).x, data_points.get(3).y, 2, 2);
+  line(data_points.get(3).x, data_points.get(3).y, data_points.get(3).x, data_points.get(3).y - 0.364 * height);
+  ellipse(data_points.get(3).x, data_points.get(3).y - 0.364 * height, 2, 2);
+
+  ellipse(data_points.get(4).x, data_points.get(4).y, 2, 2);
+  line(data_points.get(4).x, data_points.get(4).y, data_points.get(4).x, data_points.get(4).y - 0.2666 * height);
+
+  ellipse(data_points.get(5).x, data_points.get(5).y, 2, 2);
+  line(data_points.get(5).x, data_points.get(5).y, data_points.get(5).x, data_points.get(5).y - 0.296 * height);
+
+  ellipse(data_points.get(6).x, data_points.get(6).y, 2, 2);
+  line(data_points.get(6).x, data_points.get(6).y, data_points.get(6).x, data_points.get(6).y - 0.356 * height);
+  ellipse(data_points.get(6).x, data_points.get(6).y - 0.356 * height, 2, 2);
+
+  ellipse(data_points.get(7).x, data_points.get(7).y, 2, 2);
+  line(data_points.get(7).x, data_points.get(7).y, data_points.get(7).x, data_points.get(7).y - 0.3666 * height);
+  ellipse(data_points.get(7).x, data_points.get(7).y - 0.3666 * height, 2, 2);
+
+  ellipse(data_points.get(8).x, data_points.get(8).y, 2, 2);
+  line(data_points.get(8).x, data_points.get(8).y, data_points.get(8).x, data_points.get(8).y - 0.3625 * height);
+  ellipse(data_points.get(8).x, data_points.get(8).y - 0.3625 * height, 2, 2);
 }
