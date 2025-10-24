@@ -95,6 +95,54 @@ void plotRetreats(ArrayList<survCoord> coords, float[] surv_count, float[] all_l
   sub_array.clear();
 }
 
+void plotAdvanceNums(ArrayList<survCoord> coords, float[] all_longs, float[] all_lats) {
+  fill(city_colour);
+  textAlign(CENTER);
+  textSize(11);
+
+  int[] indexes = {0, 4, 9, 10, 11, 12, 14, 15, 24, 27};
+  int y_diff;
+  for (int i : indexes) {
+    if (i == 0 || i == 4) y_diff = 80;
+    else y_diff = 50;
+    float x = map(coords.get(i).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map);
+    float y = map(coords.get(i).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map) - y_diff;
+    pushMatrix();
+    translate(x, y);
+    rotate(-2 * HALF_PI / 3);
+    text(NumberFormat.getInstance().format(int(coords.get(i).count)), 0, 0);
+    popMatrix();
+    print("Count for " + str(i) + " is " + str(coords.get(i).count));
+  }
+}
+
+void plotRetreatNums(ArrayList<survCoord> coords, float[] all_longs, float[] all_lats) {
+  fill(city_colour);
+  textAlign(CENTER);
+  textSize(11);
+
+  int[] indexes = {18, 19, 25, 31, 34, 28, 38, 39, 42, 47};
+  int y_diff = 0, x_diff = 0;
+  for (int i : indexes) {
+    if (i == 42) y_diff = -40;
+    else if (i == 25) x_diff = 10;
+    else if (i == 31 || i == 28) x_diff = -20;
+    else {
+      y_diff = 40;
+      x_diff = 0;
+    }
+
+    float x = map(coords.get(i).longitude, min(all_longs), max(all_longs), left_border_map, right_border_map) + x_diff;
+    float y = map(coords.get(i).latitude, min(all_lats), max(all_lats), bottom_border_map, top_border_map) + y_diff;
+    pushMatrix();
+    translate(x, y);
+    rotate(-2 * HALF_PI / 3);
+    text(NumberFormat.getInstance().format(int(coords.get(i).count)), 0, 0);
+    popMatrix();
+    print("Count for " + str(i) + " is " + str(coords.get(i).count));
+  }
+}
+
 void plotTempLines(float[] temp_longs, float[] all_longs) {
   float left_x = getTempPos(temp_longs, all_longs).min();
   float right_x = right_border_map;
@@ -201,5 +249,31 @@ void plotLegend() {
 void plotTitle() {
   textAlign(CENTER);
   textFont(main_font);
-  text("Napoleon's Campaign in Russia - 1812", width / 2 + 90, height - 75);
+  text("Survivors of Napoleon's Campaign in Russia - 1812/1813", width / 2 + 90, height - 75);
+}
+
+void plotScale(float[] all_longs) {
+  int scaling_indicator = 100;
+  float scale_width_long = scaling_indicator * 0.009;
+  float x_diff = map(min(all_longs) + scale_width_long, min(all_longs), max(all_longs), left_border_map, right_border_map) - map(min(all_longs), min(all_longs), max(all_longs), left_border_map, right_border_map);
+
+  float x1 = 309 * width / 480;
+  float y = height / 2 - 50;
+  float x = x1;
+  stroke(city_colour);
+  strokeWeight(2);
+  for (int i = 0; i < 3; i++) {
+    // Horizontal
+    line(x, y, x + x_diff, y);
+
+    // Vertical
+    line(x, y, x, y - 5);
+    line(x + x_diff, y, x + x_diff, y - 5);
+
+    x += x_diff;
+  }
+
+  textAlign(CENTER);
+  textSize(11);
+  text("100km", x1 + (3 * x_diff / 2), y + 15);
 }

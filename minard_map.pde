@@ -1,5 +1,6 @@
+import java.text.NumberFormat;
+
 int left_border_map, right_border_map, top_border_map, bottom_border_map;
-int left_border_legend, right_border_legend, top_border_legend, bottom_border_legend;
 color back_ground = color(245, 240, 225);
 color advance = color(196, 78, 82);
 color retreat = color(76, 114, 176);
@@ -16,11 +17,6 @@ void setup() {
   right_border_map = width - 150;
   bottom_border_map = 3 * (height - 100) / 5;
   top_border_map = 100;
-
-  left_border_legend = 40;
-  right_border_legend = width / 4;
-  bottom_border_legend = height - 100;
-  top_border_legend = bottom_border_map;
 
   // Insert data from csv into a table
   Table data = loadTable("minard_data.csv", "header");
@@ -48,7 +44,7 @@ void setup() {
   float[] surv_div = getFloats(data, data.getRowCount(), "DIV");
   
   // Need all coords to keep mapping consistent
-  float[] all_longs = concat(city_longs, surv_longs);
+  float[] all_longs = concat(concat(city_longs, surv_longs), temp_longs);
   float[] all_lats = concat(city_lats, surv_lats);
   
   // Sort all survivor data points by survivor count
@@ -64,9 +60,12 @@ void setup() {
   plotRetreats(coords, surv_count, all_longs, all_lats, 3);
   plotMapPoints(city_longs, city_lats, all_longs, all_lats);
   plotCityNames(city_names, city_longs, city_lats, all_longs, all_lats);
+  plotAdvanceNums(coords, all_longs, all_lats);
+  plotRetreatNums(coords, all_longs, all_lats);
   plotTempLines(temp_longs, all_longs);
   plotTempGrad(temp_longs, all_longs, temp, temp_day, temp_month);
   plotLegend();
   plotTitle();
+  plotScale(all_longs);
   save("minard.png");
 }
